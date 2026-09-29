@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+  namespace: shopsphere
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      imagePullSecrets:
+        - name: ghcr-secret
+      containers:
+        - name: user-service
+          image: ghcr.io/bisiswostik04-design/shopsphere-user-service:latest
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - containerPort: 5001
+
+          env:
+            - name: PORT
+              value: "5001"
+
+            - name: MONGO_URL
+              value: "mongodb://$(MONGO_HOST):$(MONGO_PORT)/$(MONGO_DATABASE)_users"
+
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: shopsphere-secret
+                  key: JWT_SECRET
+
+          envFrom:
+            - configMapRef:
+                name: shopsphere-config
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 5001
+            initialDelaySeconds: 10
+            periodSeconds: 5
+
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 5001
+            initialDelaySeconds: 30
+            periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+  namespace: shopsphere
+spec:
+  selector:
+    app: user-service
+  ports:
+    - port: 5001
+      targetPort: 5001
+  type: ClusterIP
