@@ -17,7 +17,7 @@ spec:
         - name: ghcr-secret
       containers:
         - name: order-service
-          image: ghcr.io/bisiswostik04-design/shopsphere-order-service:latest
+          image: ghcr.io/bisiswostik04-design/shopsphere-order-service:4610b3581d6e233ea1491f2816fb8586cbb3134e
           imagePullPolicy: IfNotPresent
 
           ports:

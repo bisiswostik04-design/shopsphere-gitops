@@ -17,7 +17,7 @@ spec:
         - name: ghcr-secret
       containers:
         - name: notification-service
-          image: ghcr.io/bisiswostik04-design/shopsphere-notification-service:latest
+          image: ghcr.io/bisiswostik04-design/shopsphere-notification-service:4610b3581d6e233ea1491f2816fb8586cbb3134e
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5005

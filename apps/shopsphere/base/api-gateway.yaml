@@ -17,7 +17,7 @@ spec:
         - name: ghcr-secret
       containers:
         - name: api-gateway
-          image: ghcr.io/bisiswostik04-design/shopsphere-api-gateway:latest
+          image: ghcr.io/bisiswostik04-design/shopsphere-api-gateway:4610b3581d6e233ea1491f2816fb8586cbb3134e
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
