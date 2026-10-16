@@ -36,6 +36,24 @@ spec:
                   name: shopsphere-secret
                   key: JWT_SECRET
 
+            - name: SMTP_USER
+              valueFrom:
+                secretKeyRef:
+                  name: shopsphere-email-secret
+                  key: SMTP_USER
+
+            - name: SMTP_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: shopsphere-email-secret
+                  key: SMTP_PASS
+
+            - name: SMTP_FROM
+              valueFrom:
+                secretKeyRef:
+                  name: shopsphere-email-secret
+                  key: SMTP_FROM
+
           envFrom:
             - configMapRef:
                 name: shopsphere-config
