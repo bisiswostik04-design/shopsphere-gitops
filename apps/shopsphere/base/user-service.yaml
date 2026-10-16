@@ -17,7 +17,7 @@ spec:
         - name: ghcr-secret
       containers:
         - name: user-service
-          image: ghcr.io/bisiswostik04-design/shopsphere-user-service:6a7e109a251ba004fff1b3f0f0a7ace8f494574e
+          image: ghcr.io/bisiswostik04-design/shopsphere-user-service:54ab38b96a95f36cff42492025a819f95ed7c4e3
           imagePullPolicy: IfNotPresent
 
           ports:
